@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  {% extends 'base.html' %}{% block content %}
+<section class="login-wrap">
+  <div class="login-card">
+    <div class="login-icon">AI</div>
+    <h1>AI Resume Analyzer</h1>
+    <p>Log in to analyze your resume.</p>
+    <form method="post">
+      <label>Email Address</label>
+      <input type="email" name="email" placeholder="example@email.com" required>
+      <button type="submit" class="btn full">Login</button>
+    </form>
+    <a class="google" href="{{ url_for('google_login') }}">Continue with Google</a>
+  </div>
+</section>
+{% endblock %}
+</body>
+</html>

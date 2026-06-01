@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roadmap</title>
+</head>
+<body>
+
+{% extends 'base.html' %}{% block content %}
+<a class="back" href="{{ url_for('result') }}">← Back to Result</a>
+<div class="section-head"><h1>Improvement Roadmap</h1><p>Next steps based on your resume.</p></div>
+<section class="timeline">
+
+  <section class="timeline">
+  <div class="titem">
+    <b>Step 1: Improve Resume Structure</b>
+    <p>Clearly add sections for email, phone, LinkedIn, summary, skills, projects, education, and experience.</p>
+  </div>
+  <div class="titem">
+    <b>Step 2: Learn Missing Skills</b>
+    <p>{% if result.missing_skills %}Start with: {{ result.missing_skills[:6]|join(', ') }}.{% else %}Your field keywords are good, try adding advanced projects.{% endif %}</p>
+  </div>
+  <div class="titem">
+    <b>Step 3: Add Project-Based Proof</b>
+    <p>Include a real project, GitHub link, tools used, and the result/impact for each skill.</p>
+  </div>
+  <div class="titem">
+    <b>Step 4: Add ATS Keywords</b>
+    <p>Naturally incorporate important keywords from the target job description into your resume.</p>
+  </div>
+  <div class="titem">
+    <b>Step 5: Practice & Apply</b>
+    <p>Recommended roles: {{ result.roles|join(', ') }}. Customize your resume according to these roles.</p>
+  </div>
+</section>
+<div class="card">
+  <h3>Where to Improve Skills?</h3>
+  <ul>
+    <li>Clear your basics using YouTube crash courses.</li>
+    <li>You can take certification courses on Coursera, Udemy, or Great Learning.</li>
+    <li>Upload 2-3 practical projects on GitHub.</li>
+    <li>Post project screenshots and demo videos on LinkedIn.</li>
+  </ul>
+</div>
+<div class="actions center">
+  <a class="btn secondary" href="{{ url_for('result') }}">Back to Result</a>
+  
+  <a class="btn" href="{{ url_for('analyze') }}">Analyze New Resume</a></div>
+{% endblock %}
+
+  
+</body>
+</html>

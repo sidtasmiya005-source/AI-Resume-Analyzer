@@ -1,0 +1,41 @@
+{% extends 'base.html' %}{% block content %}
+<a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+<div class="section-head"><h1>Uploaded Resumes & Reports</h1><p>Here you will see the list of uploaded resumes and generated PDF reports.</p></div>
+
+<section class="result-grid">
+  <div class="card">
+    <h3>Uploaded Resume Files</h3>
+    {% if upload_files %}
+      <div class="file-list">
+        {% for f in upload_files %}
+          <div class="file-row">
+            <div><b>{{ f.name }}</b><br><small>{{ f.time }} • {{ f.size }} KB</small></div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+     <p>No uploaded resumes found yet. Please upload a resume from the analyze page.</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h3>Generated Report Files</h3>
+    {% if report_files %}
+      <div class="file-list">
+        {% for f in report_files %}
+          <div class="file-row">
+            <div><b>{{ f.name }}</b><br><small>{{ f.time }} • {{ f.size }} KB</small></div>
+            <a class="btn secondary small-btn" href="{{ url_for('download_report', filename=f.name) }}">Download</a>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No reports generated yet. Your report will appear here after analyzing a resume.</p>
+    {% endif %}
+  </div>
+</section>
+
+<div class="actions center">
+  <a class="btn" href="{{ url_for('analyze') }}">Upload New Resume</a>
+</div>
+{% endblock %}

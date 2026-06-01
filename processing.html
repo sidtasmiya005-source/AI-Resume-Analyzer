@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processing</title>
+</head>
+<body>
+
+{% extends 'base.html' %}{% block content %}
+<a class="back" href="{{ url_for('analyze') }}">← Back to Analyze</a>
+<section class="process-card">
+  <div class="loader"></div>
+  <h1>Resume Analysis Processing...</h1>
+  <p>Reading resume text, calculating ATS score, and checking skills and missing keywords...</p>
+  <div class="steps"><span>Reading Resume</span><span>Extracting Skills</span><span>Checking ATS</span><span>Preparing Result</span></div>
+</section>
+<script>setTimeout(function(){ window.location.href = "{{ url_for('result') }}"; }, 2600);</script>
+{% endblock %}
+
+  
+</body>
+</html>

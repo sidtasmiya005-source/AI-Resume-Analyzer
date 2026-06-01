@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Result</title>
+</head>
+<body>
+
+{% extends 'base.html' %}{% block content %}
+<a class="back" href="{{ url_for('analyze') }}">← Analyze Another Resume</a>
+<div class="section-head row"><div><h1>Resume Result</h1><p>Generated: {{ result.date }}</p></div><a class="btn" href="{{ url_for('download_report', filename=result.report_name) }}">Download Report</a></div>
+<section class="result-grid">
+  <div class="score-card"><h3>ATS Score</h3><div class="score">{{ result.ats_score }}<span>/100</span></div><p>Detected Field: <b>{{ result.best_field }}</b></p></div>
+  <div class="card"><h3>Contact Checks</h3><p>Email: {{ 'Yes' if result.email_found else 'No' }}</p><p>Phone: {{ 'Yes' if result.phone_found else 'No' }}</p><p>LinkedIn: {{ 'Yes' if result.linkedin_found else 'No' }}</p><p>GitHub: {{ 'Yes' if result.github_found else 'No' }}</p></div>
+</section>
+<section class="result-grid">
+  <div class="card"><h3>Found Skills</h3><div class="chips">{% for s in result.found_skills %}<span>{{ s }}</span>{% else %}<p>No strong skills found.</p>{% endfor %}</div></div>
+  <div class="card"><h3>Missing / Recommended Skills</h3><div class="chips warn">{% for s in result.missing_skills %}<span>{{ s }}</span>{% else %}<p>Good coverage.</p>{% endfor %}</div></div>
+</section>
+{% if result.jd_score is not none %}<div class="card"><h3>Job Description Match</h3><p class="big">{{ result.jd_score }}%</p><p>Missing JD Keywords: {{ result.jd_missing|join(', ') }}</p></div>{% endif %}
+<div class="card"><h3>Resume Sections</h3><div class="section-list">{% for sec,present in result.sections.items() %}<span class="{{ 'ok' if present else 'bad' }}">{{ sec }}: {{ 'Present' if present else 'Missing' }}</span>{% endfor %}</div></div>
+<div class="card"><h3>Improvement Suggestions</h3><ol>{% for s in result.suggestions %}<li>{{ s }}</li>{% endfor %}</ol></div>
+<div class="actions center"><a class="btn secondary" href="{{ url_for('home') }}">Back to Home</a><a class="btn" href="{{ url_for('roadmap') }}">Go to Roadmap</a></div>
+{% endblock %}
+
+  
+</body>
+</html>

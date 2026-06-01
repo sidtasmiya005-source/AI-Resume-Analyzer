@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyze</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+{% block content %}
+
+<a class="back" href="{{ url_for('home') }}">← Back to Home</a>
+
+<div class="section-head">
+  <h1>Analyze Resume</h1>
+  <p>Please upload your PDF, DOCX, or TXT resume. Job description is optional.</p>
+</div>
+
+<form class="upload-card" method="post" enctype="multipart/form-data">
+  <label>Upload Resume</label>
+  <input type="file" name="resume" accept=".pdf,.docx,.txt" required>
+  <label>Job Description / Target Role Keywords <span>(optional)</span></label>
+  <textarea name="job_description" rows="7" placeholder="Paste the job description here, or type the target role's skills..."></textarea>
+  <button class="btn" type="submit">Start Analyze</button>
+</form>
+{% endblock %}
+
+  
+</body>
+</html>
